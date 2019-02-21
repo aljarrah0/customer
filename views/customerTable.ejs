@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ./partial/head %>
+</head>
+
+<body>
+    <% include ./partial/header %>
+    <br>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">full name</th>
+                <th scope="col">phone number</th>
+                <th scope="col">is Gold</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% counter = 1 %>
+            <% customers.forEach(customer => { %>
+            <tr>
+                <td><%= counter++ %></td>
+                <td><%=customer.name%></td>
+                <td><%=customer.phone%></td>
+                <td><% if(customer.isGold === 'true'){%>
+                    <img src="/public/images/rightIcon.png" width="25px" height="25px">
+                    <%} else { %>
+                    <img src="/public/images/wrongIcon.png" width="25px" height="25px">
+                    <% } %>
+                </td>
+                <td>
+                    <form action="http://localhost:5050/api/customer/edit" method="GET">
+                        <button class="btn btn-primary">edit</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="http://localhost:5050/api/customer/deleteCustomer/:customer.name" method="POST">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <footer> <% include ./partial/footer %></footer>
+</body>
+
+</html>
