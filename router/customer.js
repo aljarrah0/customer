@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Customer, validate } = require('../models/customer');
 
+
 router.get('/', (req, res) => {
     Customer.find((err, customers) => {
         if (err) return console.error(err.message);
@@ -29,8 +30,6 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    console.log(req.body)
-
     validate(req.body)
         .then(() => {
             let { name, phone, isGold } = req.body;
@@ -46,8 +45,6 @@ router.post('/', (req, res) => {
 });
 
 router.post('/update/:id', (req, res) => {
-    console.log(">>>>>>>>>>> start")
-    console.log(req.body);
     validate(req.body)
         .then(() => {
             let { name, phone, isGold } = req.body;

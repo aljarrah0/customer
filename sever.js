@@ -17,7 +17,9 @@ app.use('/api/faker', fakerData);
 app.use('/public',express.static('public'));
 app.set('view engine','ejs');
 
-
+app.get('/',(req,res)=>{
+    res.render('index')
+})
 
 const port = process.env.PORT || 5050;
 app.listen(port, () => console.log(`the sever connect on port : ${port}`));
