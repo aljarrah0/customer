@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <title>list of customers</title>
     <% include ./partial/head %>
 </head>
 
@@ -15,6 +16,7 @@
                 <th scope="col">full name</th>
                 <th scope="col">phone number</th>
                 <th scope="col">is Gold</th>
+                <th scope="col">details</th>
             </tr>
         </thead>
         <tbody>
@@ -31,20 +33,13 @@
                     <% } %>
                 </td>
                 <td>
-                    <form action="http://localhost:5050/api/customer/edit" method="GET">
-                        <button class="btn btn-primary">edit</button>
-                    </form>
-                </td>
-                <td>
-                    <form action="http://localhost:5050/api/customer/deleteCustomer/:customer.name" method="POST">
-                        <button class="btn btn-danger">Delete</button>
-                    </form>
+                   <a href="/api/customer/<%= customer._id %>" class="btn btn-primary">details</a>
                 </td>
             </tr>
             <% }); %>
         </tbody>
     </table>
-    <footer> <% include ./partial/footer %></footer>
+ <% include ./partial/footer %>
 </body>
 
 </html>

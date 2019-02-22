@@ -2,39 +2,47 @@
 <html lang="en">
 
 <head>
-    <title>add customer</title>
-    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <title>edit customer</title>
+    <% include ./partial/head %>
 </head>
 
 <body>
-        <div class="container">
-    <form action="http://localhost:5050/api/customer" method="POST">
-        <div class="form-group">
-            <label for="customerName">customer name</label>
-            <input type="text" class="form-control" id="customerName" required minlength="3" maxlength="255"
-                placeholder="Enter name" name="name">
-        </div>
-        <div class="form-group">
-            <label for="phoneNumber">phone number</label>
-            <input type="text" class="form-control" id="phoneNumber" required minlength="9" maxlength="25" placeholder="phone number" name="phone">
-        </div>
-        <div class="form-check">
-            <h3>is Gold</h3>
-            <input class="form-check-input" type="radio" name="isGold" id="exampleRadios1" value="true" checked>
-            <label class="form-check-label" for="exampleRadios1">
-                ture
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="isGold" id="exampleRadios2" value="false">
-            <label class="form-check-label" for="exampleRadios2">
-                false
-            </label>
-        </div>
-        <br>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+
+    <div class="container">
+        <form action="/api/customer/update/<%= customer._id %>" method="POST">
+            <div class="form-group">
+                <label for="customerName">customer name</label>
+                <input type="text" class="form-control" id="customerName" required minlength="3" maxlength="255"
+                    placeholder="Enter name" name="name" value="<%= customer.name %>">
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">phone number</label>
+                <input type="text" class="form-control" id="phoneNumber" required minlength="9" maxlength="25"
+                    placeholder="phone number" name="phone" value="<%= customer.phone %>">
+            </div>
+            <div class="form-check">
+                <h3>is Gold</h3>
+                <input class="form-check-input" type="radio" name="isGold" id="exampleRadios1" value="true"
+                    <%= customer.isGold ? "checked":"" %>>
+                <label class="form-check-label" for="exampleRadios1">
+                    ture
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="isGold" id="exampleRadios2" value="false"
+                    <%= customer.isGold ? "checked":"" %>>
+                <label class="form-check-label" for="exampleRadios2">
+                    false
+                </label>
+                <br>
+
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="/api/customer/delete/<%= customer._id %>" class="btn btn-danger">Delete</a>
+        </form>
     </div>
+    <% include ./partial/footer %>
 </body>
 
 </html>

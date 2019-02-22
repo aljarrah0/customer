@@ -19,17 +19,17 @@ const Customer = mongoose.model('Customer', mongoose.Schema({
     },
     isGold: {
         type: String,
-        enum:['true','false'],
+        enum: ['true', 'false'],
     }
 }));
 
-async function validateCustomer(customer) {
+function validateCustomer(customer) {
     let shcmea = {
         name: Joi.string().min(3).max(255).required(),
         phone: Joi.string().min(9).max(25).required(),
-        isGold:Joi.string().only(['false','true'])
+        isGold: Joi.string().only(['false', 'true'])
     }
-    return await Joi.validate(customer, shcmea)
+    return Joi.validate(customer, shcmea)
     // .then(()=> console.log('Yse'))
     // .catch(err=>console.error(err.message));
 }

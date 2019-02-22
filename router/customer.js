@@ -13,14 +13,18 @@ router.get('/addCustomer', (req, res) => {
     res.render('addCustomer')
 });
 
-router.get('/edit', (req, res) => {
-    res.render('editCustomer');
+router.get('/delete/:id', (req, res) => {
+    Customer.findByIdAndRemove(req.params.id,(err,result)=>{
+        if(err)return res.status(404).send(err.message);
+        console.log(result);
+        res.status(200).redirect('/api/customer');
+    })
 });
 
 router.get('/:id', (req, res) => {
     Customer.findById(req.params.id, (err, customer) => {
         if (err) return res.status(404).send(err.message);
-        res.send(customer)
+        res.render('editCustomer',{customer})
     });
 });
 
@@ -41,10 +45,7 @@ router.post('/', (req, res) => {
         .catch(err => res.status(400).send(err.message));
 });
 
-
-
-
-router.put('/:id', (req, res) => {
+router.post('/update/:id', (req, res) => {
     console.log(">>>>>>>>>>> start")
     console.log(req.body);
     validate(req.body)
@@ -62,14 +63,10 @@ router.put('/:id', (req, res) => {
         .catch(err => res.status(400).send(err.message));
 });
 
-
-router.post('/deleteCustomer/:name', (req, res) => {
-    console.log(req.params.name);
-    res.end('Delete customer')
-});
 // Anvalid URL 
 router.get('*', (req, res) => {
     console.log("Sorry,this is an anvalid URL.");
     res.end("Sorry, this is an anvalid URL.")
 });
+
 module.exports = router;

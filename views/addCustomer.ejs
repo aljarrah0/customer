@@ -3,13 +3,13 @@
 
 <head>
     <title>add customer</title>
-    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <% include ./partial/head %>
 </head>
 
 <body>
 
     <div class="container">
-        <form action="http://localhost:5050/api/customer" method="POST">
+        <form action="/api/customer" method="POST">
             <div class="form-group">
                 <label for="customerName">customer name</label>
                 <input type="text" class="form-control" id="customerName" required minlength="3" maxlength="255"
@@ -37,6 +37,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
+    <% include ./partial/footer %>
 </body>
 
 </html>
